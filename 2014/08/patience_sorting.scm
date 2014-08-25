@@ -68,10 +68,3 @@
              (build-stacks-with-existing (reverse (cdar stacks)) (cdr stacks)))))
   (aux (list) (build-stacks deck)))
   
-
-(define (factorial n)
-  (let loop ((n n) (acc 1))
-    (if (< n 2)
-        acc
-        (loop (- n 1) (* acc n))))
-  (loop n 1))
