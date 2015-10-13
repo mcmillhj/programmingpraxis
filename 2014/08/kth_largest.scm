@@ -1,0 +1,40 @@
+(define pq-empty '())
+(define pq-empty? null?)
+
+(define (pq-first heap)
+  (if (pq-empty? heap)
+      (error "cannot retrieve from empty heap")
+      (car heap)))
+
+(define (pq-merge lt? h1 h2)
+  (cond ((pq-empty? h1) h2)
+        ((pq-empty? h2) h1)
+        ((lt? (car h1) (car h2))
+         (cons (car h2) (cons h1 (cdr h2))))
+        (else (cons (car h1) (cons h2 (cdr h1))))))
+
+(define (pq-insert lt? x pq)
+  (pq-merge lt? (list x) pq))
+
+(define pq pq-empty)
+(define pq (pq-insert < 3 pq))
+(display pq)
+(newline)
+(define pq (pq-insert < 1 pq))
+(display pq)
+(newline)
+(define pq (pq-insert < 4 pq))
+(display pq)
+(newline)
+(define pq (pq-insert < 9 pq))
+(display pq)
+(newline)
+(define pq (pq-insert < -1 pq))
+(display pq)
+(newline)  
+
+(let loop ((pq pq-empty) (xs (list 3 1 4 9 10)))
+  (if (null? xs) 
+      pq
+      (loop (pq-insert < pq (car xs)) (cdr xs))))
+      
